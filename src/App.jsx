@@ -137,7 +137,7 @@ function App() {
                       id="default-checkbox"
                       type="checkbox"
                       checked={e.done}
-                      className=" w-7 h-7 bg-gray-100 border-gray-300 hover:bg-gray-400 ring-0 border rounded-lg checked:bg-purple-600 checked:hover:bg-purple-700 checked:focus:bg-purple-600 focus:ring-purple-600"
+                      className=" w-7 h-7 bg-white border-black hover:bg-gray-300 ring-0 border rounded-lg checked:bg-purple-600 checked:hover:bg-purple-700 checked:focus:bg-purple-600 focus:ring-purple-600"
                       onChange={() => handleCheckboxChange(e.id)}
                     />
                     <div
