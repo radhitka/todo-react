@@ -111,10 +111,12 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen justify-center items-center">
+      <div className="min-h-screen justify-center items-center dark:bg-gray-800">
         <div className="md:w-[40rem] mx-7 md:mx-auto grid gap-3">
           <div className="w-full flex items-center justify-center p-5 mt-10">
-            <h1 className="text-4xl font-bold text-gray-500">TODO LIST</h1>
+            <h1 className="text-4xl font-bold text-gray-500 dark:text-gray-300">
+              TODO LIST
+            </h1>
           </div>
           <div className="w-full flex justify-between">
             <button
@@ -125,12 +127,12 @@ function App() {
               Tambah
             </button>
           </div>
-          <div className="w-full grid grid-cols-1 bg-gray-300 rounded-md p-4 gap-4">
+          <div className="w-full grid grid-cols-1 bg-gray-300 dark:bg-gray-600 rounded-md p-4 gap-4">
             {data.map((e, key) => {
               return (
                 <div
                   key={key}
-                  className="flex justify-between py-3 px-3 bg-gray-200 w-full rounded-lg items-center"
+                  className="flex justify-between py-3 px-3 bg-gray-200 dark:bg-gray-400 w-full rounded-lg items-center"
                 >
                   <div className="flex gap-3 items-center">
                     <input
