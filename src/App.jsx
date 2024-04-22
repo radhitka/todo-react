@@ -11,6 +11,8 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
   const [title, setTitle] = useState('');
+  const [dataId, setId] = useState('');
+  const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
     setData(dataTodo);
@@ -53,6 +55,8 @@ function App() {
   };
 
   const closeModal = () => {
+    setTitle('');
+    setIsUpdate(false);
     setIsOpen(false);
   };
 
@@ -61,19 +65,43 @@ function App() {
   };
 
   const handleSubmit = () => {
-    const newData = [
-      {
-        id: Math.floor(Math.random() * 100),
-        title: title,
-        date: moment().format('DD MMMM YYYY'),
-        done: false,
-      },
-      ...data,
-    ];
+    if (dataId == '') {
+      var newData = [
+        {
+          id: Math.floor(Math.random() * 100),
+          title: title,
+          date: moment().format('DD MMMM YYYY'),
+          done: false,
+        },
+        ...data,
+      ];
+    } else {
+      var newData = data.map((item) => {
+        if (item.id === dataId) {
+          item.title = title;
+        }
+        return item;
+      });
+    }
 
     setData(newData);
     setIsOpen(false);
     setTitle('');
+    setId('');
+  };
+
+  const handleUpdate = (id) => {
+    const checkData = data.filter((item) => item.id === id);
+    if (checkData.length == 0) {
+      return;
+    }
+
+    setId(id);
+
+    const newData = checkData[0];
+    setIsOpen(true);
+    setTitle(newData.title);
+    setIsUpdate(true);
   };
 
   return (
@@ -127,7 +155,10 @@ function App() {
                         className="w-5 h-5 text-red-500"
                       />
                     </div>
-                    <div className="w-9 h-9 bg-white hover:bg-gray-100 rounded-md p-2 justify-center cursor-pointer">
+                    <div
+                      className="w-9 h-9 bg-white hover:bg-gray-100 rounded-md p-2 justify-center cursor-pointer"
+                      onClick={() => handleUpdate(e.id)}
+                    >
                       <FontAwesomeIcon
                         icon={faPencil}
                         className="w-5 h-5 text-green-500"
@@ -140,6 +171,7 @@ function App() {
           </div>
         </div>
         <Modal
+          isUpdate={isUpdate}
           isOpen={isOpen}
           onClose={closeModal}
           title={title}

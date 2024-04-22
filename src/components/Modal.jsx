@@ -1,4 +1,5 @@
 function Modal(props) {
+  const isUpdate = props.isUpdate;
   const handleChangetitle = props.setDataTitle;
   const handleSubmit = props.setSubmit;
   const title = props.title;
@@ -18,7 +19,9 @@ function Modal(props) {
     >
       <div className="w-[36rem] bg-white p-8 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">Pengisian</h2>
+          <h2 className="text-lg font-semibold">
+            {isUpdate ? 'Edit data' : 'Tambah data'}
+          </h2>
           <button
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
             onClick={onClose}
@@ -56,7 +59,7 @@ function Modal(props) {
             className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none"
             onClick={handleSubmit}
           >
-            Simpan
+            {isUpdate ? 'Ubah' : 'Simpan'}
           </button>
 
           <button
