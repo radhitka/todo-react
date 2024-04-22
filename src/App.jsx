@@ -8,7 +8,9 @@ import Modal from './components/Modal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState(JSON.parse(localStorage.getItem('todos')));
+  const [data, setData] = useState(
+    JSON.parse(localStorage.getItem('todos')) ?? []
+  );
   const [title, setTitle] = useState('');
   const [dataId, setId] = useState('');
   const [isUpdate, setIsUpdate] = useState(false);
