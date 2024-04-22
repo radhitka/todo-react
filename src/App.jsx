@@ -105,8 +105,8 @@ function App() {
 
   return (
     <>
-      <div classN ame="max-w-6xls min-h-screen bg-white">
-        <div className="w-[40rem] mx-auto grid gap-3">
+      <div className="min-h-screen justify-center items-center">
+        <div className="md:w-[40rem] mx-7 md:mx-auto grid gap-3">
           <div className="w-full flex items-center justify-center p-5 mt-10">
             <h1 className="text-4xl font-bold text-gray-500">TODO LIST</h1>
           </div>

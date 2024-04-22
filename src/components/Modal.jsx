@@ -17,7 +17,7 @@ function Modal(props) {
     <div
       className={`fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 ${modalAnimation}`}
     >
-      <div className="w-[36rem] bg-white p-8 rounded-lg shadow-md">
+      <div className="w-[36rem] mx-6 bg-white p-8 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold">
             {isUpdate ? 'Edit data' : 'Tambah data'}
