@@ -1,12 +1,16 @@
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import Modal from './components/Modal';
 import dataTodo from './data/list';
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [title, setTitle] = useState('');
 
   useEffect(() => {
     setData(dataTodo);
@@ -35,11 +39,6 @@ function App() {
       cancelButtonText: 'Tidak',
     }).then((result) => {
       if (result.isConfirmed) {
-        // Swal.fire({
-        //   title: 'Data dihapus!',
-        //   text: 'Data sudah dihapus...',
-        //   icon: 'success',
-        // });
         const newData = [...data];
 
         newData.splice(index, 1);
@@ -49,9 +48,37 @@ function App() {
     });
   };
 
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const handleChangetitle = (val) => {
+    setTitle(val);
+  };
+
+  const handleSubmit = () => {
+    const newData = [
+      {
+        id: Math.floor(Math.random() * 100),
+        title: title,
+        date: moment().format('DD MMMM YYYY'),
+        done: false,
+      },
+      ...data,
+    ];
+
+    setData(newData);
+    setIsOpen(false);
+    setTitle('');
+  };
+
   return (
     <>
-      <div className="max-w-6xls min-h-screen bg-white">
+      <div classN ame="max-w-6xls min-h-screen bg-white">
         <div className="w-[40rem] mx-auto grid gap-3">
           <div className="w-full flex items-center justify-center p-5 mt-10">
             <h1 className="text-4xl font-bold text-gray-500">TODO LIST</h1>
@@ -59,7 +86,8 @@ function App() {
           <div className="w-full flex justify-between">
             <button
               type="button"
-              className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2"
+              className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2"
+              onClick={() => openModal()}
             >
               Tambah
             </button>
@@ -111,6 +139,13 @@ function App() {
             })}
           </div>
         </div>
+        <Modal
+          isOpen={isOpen}
+          onClose={closeModal}
+          title={title}
+          setDataTitle={handleChangetitle}
+          setSubmit={handleSubmit}
+        />
       </div>
     </>
   );
