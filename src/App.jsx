@@ -5,18 +5,17 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import Modal from './components/Modal';
-import dataTodo from './data/list';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(JSON.parse(localStorage.getItem('todos')));
   const [title, setTitle] = useState('');
   const [dataId, setId] = useState('');
   const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
-    setData(dataTodo);
-  }, []);
+    localStorage.setItem('todos', JSON.stringify(data));
+  }, [data]);
 
   const handleCheckboxChange = (id) => {
     const newData = data.map((item) => {
